@@ -45,8 +45,8 @@ const filterTreeDataArray = (root: TreeNodeData, filter: TreeFilter, ...filterOb
         node._loadMoreDom=undefined;
         node._parent = parent; //设置上级
         // console.log(node.name);
-        if (node !== root && (filter === null || filter.apply(null, [node, ...filterObject]))) {
-            //console.log('match=='+node.name);
+        if ( (filter === null || filter.apply(null, [node, ...filterObject]))) {
+            // console.log('match=='+node.name);
             let tempNode = node;
             while (tempNode && !setAddNode.has(tempNode)) {
                 setAddNode.add(tempNode);
@@ -494,3 +494,8 @@ export default class Tree {
        
     }
 }
+if((window as any).ET==undefined){
+    (window as any).ET={
+    };
+}
+(window as any).ET.Tree=Tree;

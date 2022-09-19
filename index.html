@@ -5,9 +5,9 @@
         <meta name="renderer" content="webkit" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="format-detection" content="telephone=no,email=no,address=no">
-        <script type="text/javascript" src="http://localhost:9999/pm/js/jquery/jquery-1.12.0.min.js"></script>
-        <link href="http://localhost:9999/pm/css/style_new.css" rel="stylesheet" type="text/css">
-        <link href="http://localhost:9999/pm/css/style.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="http://localhost:9000/pm/js/jquery/jquery-1.9.1.min.js"></script>
+        <link href="http://localhost:9000/pm/css/style_new.css" rel="stylesheet" type="text/css">
+        <link href="http://localhost:9000/pm/css/style.css" rel="stylesheet" type="text/css">
         <title>Json Tree</title>
         <style>
             .loadMore{
@@ -24,40 +24,39 @@
          <input type="text" id="textInput"  class='text'/>
         <div id="treeDIV" style='height: 500px;overflow: auto;width:500px;border:1px solid #d1d1d1;margin-top:10px;'>
         </div>
-        <script >
-             window.$$1=jQuery;
-            $(function(){
-               jQuery.ajax({
-                   url:'./treeData.json',
-                    method:'GET'
-                    ,dataType  :'json'
-                }).then(function(treeData){
-                        treeData.close=false;
-                        window.treeObj=new ET.Tree(treeData,{
-                            includeRoot:true,
-                            nodeIcon:'',
-                            renderDom:'treeDIV',
-                            filterInput:'textInput',
-                            noMatchDom:'<div style="color:red;margin:50px;text-align:center;">没有匹配的部门</div>',
-                            selectedNodeID:1303,
-                            selectedNodeStyle:{
-                                fontWeight:'bold'
-                            },
-                            selectedNodeClass:'selectedNode',
-                            renderNodeTemplate:function(textNode,nodeData){
-                                // if(nodeData._parent){
-                                //     $(textNode).html(nodeData._parent.name +'/'+ $(textNode).text() +" ");
-                                // }
-                            },
-                            onNodeSelect:function(event,data,dom,oldselecteDom){
-                                console.log(data);
-                                console.log(dom);
-                                $(oldselecteDom).css('fontWeight','normal');
-                            }
-                        });
-	                })
-              })
-        </script>
-         <script type="text/javascript" src="./dist/tree.js"></script>
+         <script type="module" src="./jsonTree.ts"></script>
+         <script >
+           $(function(){
+              jQuery.ajax({
+                  url:'./treeData.json',
+                   method:'GET'
+                   ,dataType  :'json'
+               }).then(function(treeData){
+                       treeData.close=false;
+                       window.treeObj=new ET.Tree(treeData,{
+                           includeRoot:true,
+                           nodeIcon:'',
+                           renderDom:'treeDIV',
+                           filterInput:'textInput',
+                           noMatchDom:'<div style="color:red;margin:50px;text-align:center;">没有匹配的部门</div>',
+                           selectedNodeID:1303,
+                           selectedNodeStyle:{
+                               fontWeight:'bold'
+                           },
+                           selectedNodeClass:'selectedNode',
+                           renderNodeTemplate:function(textNode,nodeData){
+                               // if(nodeData._parent){
+                               //     $(textNode).html(nodeData._parent.name +'/'+ $(textNode).text() +" ");
+                               // }
+                           },
+                           onNodeSelect:function(event,data,dom,oldselecteDom){
+                               console.log(data);
+                               console.log(dom);
+                               $(oldselecteDom).css('fontWeight','normal');
+                           }
+                       });
+                   })
+             })
+       </script>
     </body>
 </html>

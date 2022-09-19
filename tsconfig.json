@@ -24,6 +24,8 @@
     "noImplicitThis": true,
     "declaration": true
   },
-
+"exclude": [
+  "dist"
+],
   "include": ["./**.ts"]
 }
